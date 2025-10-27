@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREE AI Starter Kit - aiforgenz</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0F172A;
+            color: #FFFFFF;
+            line-height: 1.6;
+        }
+        
+        .page {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            min-height: 100vh;
+            page-break-after: always;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* COVER PAGE */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cover::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.3) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        .cover::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation: pulse 5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .cover-content {
+            z-index: 1;
+        }
+        
+        .logo-text {
+            font-size: 72px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #D946EF 0%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+        
+        .free-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #D946EF 0%, #A855F7 100%);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(217, 70, 239, 0.4);
+        }
+        
+        .main-title {
+            font-size: 56px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            color: #94A3B8;
+            margin-bottom: 60px;
+            font-weight: 400;
+        }
+        
+        .cta-box {
+            background: rgba(217, 70, 239, 0.1);
+            border: 2px solid #D946EF;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 80px;
+        }
+        
+        .cta-box h3 {
+            color: #D946EF;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .toc h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #06B6D4;
+        }
+        
+        .toc-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            font-size: 18px;
+        }
+        
+        .toc-item:last-child {
+            border-bottom: none;
+        }
+        
+        .toc-number {
+            color: #D946EF;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        
+        /* SECTION HEADERS */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-number {
+            font-size: 14px;
+            color: #06B6D4;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-desc {
+            font-size: 18px;
+            color: #94A3B8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* TOOL CARDS */
+        .tool-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1px solid rgba(217, 70, 239, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(217, 70, 239, 0.3);
+        }
+        
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #D946EF 0%, #06B6D4 100%);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #D946EF 0%, #A855F7 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-right: 20px;
+        }
+        
+        .tool-name {
+            font-size: 32px;
+            color: #FFFFFF;
+        }
+        
+        .tool-category {
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.2);
+            color: #06B6D4;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .tool-desc {
+            font-size: 16px;
+            color: #CBD5E1;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .tool-section {
+            margin-bottom: 25px;
+        }
+        
+        .tool-section h4 {
+            color: #D946EF;
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tool-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .tool-section li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+            color: #CBD5E1;
+            font-size: 15px;
+        }
+        
+        .tool-section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #06B6D4;
+            font-weight: bold;
+        }
+        
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            color: #06B6D4;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 24px;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-link:hover {
+            background: rgba(6, 182, 212, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .real-talk {
+            background: rgba(217, 70, 239, 0.1);
+            border-left: 3px solid #D946EF;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        
+        .real-talk strong {
+            color: #D946EF;
+            font-weight: 600;
+        }
+        
+        /* PROMPT TEMPLATES */
+        .prompt-box {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            font-family: 'Space Grotesk', monospace;
+        }
+        
+        .prompt-title {
+            color: #06B6D4;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .prompt-code {
+            background: #0F172A;
+            border-radius: 10px;
+            padding: 20px;
+            color: #94A3B8;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-x: auto;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        .prompt-why {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        
+        .prompt-why strong {
+            color: #D946EF;
+        }
+        
+        /* TABLE */
+        .planner-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .planner-table th {
+            background: linear-gradient(135deg, #D946EF 0%, #A855F7 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .planner-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            color: #CBD5E1;
+            font-size: 14px;
+        }
+        
+        .planner-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-progress { background: rgba(217, 70, 239, 0.2); color: #D946EF; }
+        .status-ready { background: rgba(6, 182, 212, 0.2); color: #06B6D4; }
+        .status-idea { background: rgba(148, 163, 184, 0.2); color: #94A3B8; }
+        .status-posted { background: rgba(34, 197, 94, 0.2); color: #22C55E; }
+        
+        /* CLOSING */
+        .closing-box {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(217, 70, 239, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 60px 0;
+        }
+        
+        .closing-box h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .closing-box p {
+            font-size: 18px;
+            color: #CBD5E1;
+            margin-bottom: 30px;
+        }
+        
+        .social-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, #D946EF 0%, #A855F7 100%);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(217, 70, 239, 0.4);
+        }
+        
+        .social-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(217, 70, 239, 0.6);
+        }
+        
+        /* UTILITIES */
+        .text-gradient {
+            background: linear-gradient(135deg, #D946EF 0%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .highlight {
+            color: #06B6D4;
+            font-weight: 600;
+        }
+        
+        /* PRINT STYLES */
+        @media print {
+            body {
+                background: white;
+            }
+            .page {
+                page-break-after: always;
+                max-width: 100%;
+            }
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .page {
+                padding: 40px 20px;
+            }
+            .logo-text {
+                font-size: 48px;
+            }
+            .main-title {
+                font-size: 36px;
+            }
+            .subtitle {
+                font-size: 18px;
+            }
+            .section-title {
+                font-size: 32px;
+            }
+            .tool-name {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="page cover">
+    <div class="cover-content">
+        <div class="free-badge">100% FREE</div>
+        <div class="logo-text">AI STARTER KIT</div>
+        <h1 class="main-title">Your Gen Z Guide to<br>Working Smarter<br>(Not Harder)</h1>
+        <p class="subtitle">5 Must-Try Tools + Ready-to-Use Prompts + Content Planner</p>
+        
+        <div class="cta-box">
+            <h3>👋 HEY, YOU!</h3>
+            <p style="color: #CBD5E1; font-size: 16px;">Yeah, you scrolling through this at 2 AM probably avoiding actual work. We get it. You've got assignments due, content to create, side hustles to build, and exactly zero extra hours in the day.</p>
+            <p style="color: #CBD5E1; font-size: 16px; margin-top: 15px;">This kit = No fluff. No corporate jargon. Just the actual tools we use every day to get stuff done faster.</p>
+        </div>
+        
+        <div style="margin-top: 60px; font-size: 14px; color: #64748B;">
+            by <span class="text-gradient" style="font-weight: 600; font-size: 18px;">@aiforgenz</span>
+        </div>
+    </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="page">
+    <div class="toc">
+        <h2>What's Inside 📖</h2>
+        <div class="toc-item">
+            <span><span class="toc-number">01</span> 5 Must-Try AI Tools for Gen Z</span>
+            <span style="color: #64748B;">Page 3-7</span>
+        </div>
+        <div class="toc-item">
+            <span><span class="toc-number">02</span> AI Prompt Template Kit</span>
+            <span style="color: #64748B;">Page 8-10</span>
+        </div>
+        <div class="toc-item">
+            <span><span class="toc-number">03</span> AI Content Planner Template</span>
+            <span style="color: #64748B;">Page 11-12</span>
+        </div>
+    </div>
+    
+    <div style="background: rgba(217, 70, 239, 0.1); border-left: 4px solid #D946EF; padding: 30px; border-radius: 15px; margin-top: 60px;">
+        <h3 style="color: #D946EF; margin-bottom: 15px;">⚡ Quick Start</h3>
+        <p style="color: #CBD5E1; line-height: 1.8;">If you actually read all of this (not just skimmed), you're already ahead of most people who download guides and never open them.</p>
+        <p style="color: #CBD5E1; margin-top: 15px; line-height: 1.8;"><strong style="color: #06B6D4;">Here's what you do now:</strong><br>
+        1. Pick ONE tool and actually sign up today<br>
+        2. Steal ONE prompt and test it right now<br>
+        3. Set up the planner (even in Notes app)</p>
+    </div>
+</div>
+
+<!-- PART 1: TOOLS -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Part 01</div>
+        <h2 class="section-title">5 MUST-TRY AI TOOLS</h2>
+        <p class="section-desc">Listen, there are like a million AI tools out there. We've tested basically everything and these are the ones that actually stuck around.</p>
+    </div>
+    
+    <!-- CHATGPT -->
+    <div class="tool-card">
+        <div class="tool-header">
+            <div class="tool-icon">🤖</div>
+            <div>
+                <h3 class="tool-name">ChatGPT</h3>
+            </div>
+        </div>
+        <span class="tool-category">Writing & Productivity</span>
+        
+        <p class="tool-desc">Think of it as that one friend who's really good at everything and never sleeps. ChatGPT is basically a conversation with an AI that can write, brainstorm, explain complicated stuff, and help you figure out life one prompt at a time.</p>
+        
+        <div class="tool-section">
+            <h4>Why Gen Z Actually Uses It:</h4>
+            <ul>
+                <li><strong>Essay/Assignment Help</strong> - Get outlines, research summaries, help structuring arguments (just don't copy-paste, your prof will know 💀)</li>
+                <li><strong>Career Stuff</strong> - Write cover letters, prep for interviews, translate your chaos into professional-sounding emails</li>
+                <li><strong>Learning Anything Fast</strong> - Explain concepts like you're five, create study guides, break down topics your textbook makes too complicated</li>
+            </ul>
+        </div>
+        
+        <div class="tool-section">
+            <h4>What Makes It Good:</h4>
+            <ul>
+                <li>Free version works great for most things</li>
+                <li>Remembers your conversation (no repeating yourself)</li>
+                <li>Can switch tones from formal to casual instantly</li>
+                <li>Actually understands context and nuance</li>
+            </ul>
+        </div>
+        
+        <a href="https://chat.openai.com" class="tool-link">Access ChatGPT →</a>
+        
+        <div class="real-talk">
+            <strong>Real Talk:</strong> The paid version (ChatGPT Plus) is worth it if you're using it daily. Faster responses, better model, priority access. But honestly? Start with free.
+        </div>
+    </div>
+</div>
+
+<!-- CANVA AI -->
+<div class="page">
+    <div class="tool-card">
+        <div class="tool-header">
+            <div class="tool-icon">🎨</div>
+            <div>
+                <h3 class="tool-name">Canva AI</h3>
+            </div>
+        </div>
+        <span class="tool-category">Design & Visual Content</span>
+        
+        <p class="tool-desc">Canva's been around, but their AI features just turned it into creative mode on steroids. Magic Design, AI image generation, background remover – basically design software that reads your mind.</p>
+        
+        <div class="tool-section">
+            <h4>Why Gen Z Actually Uses It:</h4>
+            <ul>
+                <li><strong>Social Media Content</strong> - Make posts, stories, reels thumbnails that don't look like you made them in 5 minutes (even though you did)</li>
+                <li><strong>Presentation Glow-Ups</strong> - Transform boring slides into something your classmates will actually screenshot</li>
+                <li><strong>Personal Branding</strong> - Create logos, business cards, portfolios without hiring a designer</li>
+            </ul>
+        </div>
+        
+        <div class="tool-section">
+            <h4>What Makes It Good:</h4>
+            <ul>
+                <li>Templates for literally everything</li>
+                <li>Magic Resize lets you adapt one design across all platforms</li>
+                <li>AI image generator when you need visuals</li>
+                <li>Collaboration features for group projects</li>
+            </ul>
+        </div>
+        
+        <a href="https://canva.com" class="tool-link">Access Canva →</a>
+        
+        <div class="real-talk">
+            <strong>Real Talk:</strong> Free version is honestly enough for most people. Pro is nice for the background remover and extra storage, but only upgrade when you're actually making money from your content.
+        </div>
+    </div>
+    
+    <!-- MIDJOURNEY -->
+    <div class="tool-card">
+        <div class="tool-header">
+            <div class="tool-icon">🖼️</div>
+            <div>
+                <h3 class="tool-name">Midjourney</h3>
+            </div>
+        </div>
+        <span class="tool-category">AI Image Generation</span>
+        
+        <p class="tool-desc">Type what you want to see, get images that look like they came from an alternate reality. It's wild, it's powerful, and yes, it works way better than you'd expect.</p>
+        
+        <div class="tool-section">
+            <h4>Why Gen Z Actually Uses It:</h4>
+            <ul>
+                <li><strong>Content Creation</strong> - Generate unique visuals for posts, thumbnails, mood boards</li>
+                <li><strong>Portfolio Projects</strong> - Create concept art, book covers, album artwork</li>
+                <li><strong>Inspiration Hunting</strong> - Visualize ideas before committing, explore aesthetics</li>
+            </ul>
+        </div>
+        
+        <div class="tool-section">
+            <h4>What Makes It Good:</h4>
+            <ul>
+                <li>Quality is genuinely insane (like, "wait this isn't real?" level)</li>
+                <li>Community gallery for inspiration</li>
+                <li>Control over style, mood, composition</li>
+                <li>Fast generation (usually under a minute)</li>
+            </ul>
+        </div>
+        
+        <a href="https://midjourney.com" class="tool-link">Access Midjourney →</a>
+        
+        <div class="real-talk">
+            <strong>Real Talk:</strong> There's a learning curve and it's not free (plans start around $10/month). But if you're serious about visual content, it pays for itself.
+        </div>
+    </div>
+</div>
+
+<!-- GAMMA & ELEVENLABS -->
+<div class="page">
+    <div class="tool-card">
+        <div class="tool-header">
+            <div class="tool-icon">📊</div>
+            <div>
+                <h3 class="tool-name">Gamma</h3>
+            </div>
+        </div>
+        <span class="tool-category">Presentations & Docs</span>
+        
+        <p class="tool-desc">PowerPoint and Google Slides had a baby with AI, and that baby is actually cool. Gamma turns your rough ideas into polished presentations without the manual labor.</p>
+        
+        <div class="tool-section">
+            <h4>Why Gen Z Actually Uses It:</h4>
+            <ul>
+                <li><strong>Quick Presentations</strong> - Turn bullet points into full slide decks in minutes</li>
+                <li><strong>Portfolio Websites</strong> - Create simple, clean web pages to showcase work</li>
+                <li><strong>Pitch Decks</strong> - Make presentations that don't look boring</li>
+            </ul>
+        </div>
+        
+        <a href="https://gamma.app" class="tool-link">Access Gamma →</a>
+    </div>
+    
+    <div class="tool-card">
+        <div class="tool-header">
+            <div class="tool-icon">🎙️</div>
+            <div>
+                <h3 class="tool-name">ElevenLabs</h3>
+            </div>
+        </div>
+        <span class="tool-category">Voice AI & Audio</span>
+        
+        <p class="tool-desc">AI voice generator that doesn't sound like a robot. Seriously. Clone your voice, create character voices, turn text into speech that actually sounds human.</p>
+        
+        <div class="tool-section">
+            <h4>Why Gen Z Actually Uses It:</h4>
+            <ul>
+                <li><strong>Content Creation</strong> - Add voiceovers to videos without recording</li>
+                <li><strong>Accessibility</strong> - Turn articles/docs into audio for studying while commuting</li>
+                <li><strong>Podcast/Audio Projects</strong> - Create consistent voiceovers, generate character voices</li>
+            </ul>
+        </div>
+        
+        <a href="https://elevenlabs.io" class="tool-link">Access ElevenLabs →</a>
+        
+        <div class="real-talk">
+            <strong>Real Talk:</strong> Free tier gives you 10k characters/month. Pro tip: use it for background voiceovers, not replacing genuine on-camera content.
+        </div>
+    </div>
+</div>
+
+<!-- PART 2: PROMPTS -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Part 02</div>
+        <h2 class="section-title">AI PROMPT TEMPLATES</h2>
+        <p class="section-desc">Here's the truth nobody tells you: AI tools are only as good as what you ask them. Bad prompts = bad results. Good prompts = "wait, did AI just read my mind?"</p>
+    </div>
+    
+    <div class="prompt-box">
+        <div class="prompt-title">🔥 BRAINSTORMING CONTENT IDEAS</div>
+        <div class="prompt-code">
+I create content about [YOUR NICHE] for [YOUR PLATFORM]. My audience is [DESCRIBE AUDIENCE].
+
+I need 20 content ideas that:
+- Are relevant to current trends
+- Solve specific problems my audience has
+- Can be created with [AVAILABLE RESOURCES/TIME]
+- Mix educational and entertaining formats
+
+For each idea, give me:
+1. The concept/hook
+2. Why it would perform well
+3. Quick execution notes
+
+Make them specific, not generic.
+        </div>
+        <div class="prompt-why">
+            <strong>Why this works:</strong> Gives context about you, sets clear criteria, asks for reasoning, demands specificity.
+        </div>
+    </div>
+    
+    <div class="prompt-box">
+        <div class="prompt-title">📱 WRITING SOCIAL MEDIA CAPTIONS</div>
+        <div class="prompt-code">
+Write a [PLATFORM] caption for a post about [TOPIC/CONTENT].
+
+Tone: [casual/professional/funny/inspirational]
+Length: [character count or "short/medium/long"]
+
+The post should:
+- Hook in the first line
+- [MAIN MESSAGE OR CTA]
+- Feel authentic, not corporate
+- Include a subtle CTA to [ACTION]
+
+Write 3 variations with different hooks.
